@@ -40,7 +40,6 @@ public class Lecture1 {
       System.out.println(young);
     }
 
-
   }
 
   @Test
