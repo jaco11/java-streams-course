@@ -12,10 +12,22 @@ import mockdata.MockData;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+/**
+ * Grouping and Counting
+ */
 public class Lecture8 {
 
   @Test
   public void simpleGrouping() throws Exception {
+
+    final Map<String, List<Car>> groupingMake = MockData.getCars()
+        .stream()
+        .collect(Collectors.groupingBy(Car::getMake));
+
+    groupingMake.forEach((make, cars) -> {
+      System.out.println(make);
+      cars.forEach(System.out::println);
+    });
 
   }
 
@@ -34,6 +46,10 @@ public class Lecture8 {
             "Alex"
         );
 
+    final Map<String, Long> counting = names.stream().
+        collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+    counting.forEach((name, count) -> System.out.println(name + " > " + count));
 
   }
 
