@@ -1,5 +1,8 @@
 package lectures;
 
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 import beans.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,16 @@ public class Lecture12 {
         .map(Person::getEmail)
         .collect(Collectors.toList());
 
-    emails.forEach(System.out::println);
+    List<String> emails1 = MockData.getPeople()
+        .stream()
+        .map(Person::getEmail)
+        .collect(
+            ArrayList::new,
+            ArrayList::add,
+            (list1, list2) -> list1.addAll(list2)
+        );
+
+    emails1.forEach(System.out::println);
+    assertThat(emails).isEqualTo(emails1);
   }
 }
